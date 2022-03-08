@@ -1,5 +1,6 @@
 package com.atguigu.test;
 
+import com.atguigu.bean.Blue;
 import com.atguigu.bean.Person;
 import com.atguigu.config.MainConfig;
 import com.atguigu.config.MainConfig2;
@@ -20,6 +21,17 @@ public class IOCTest {
     @Test
     public void testImport() {
         printBeans(applicationContext);
+        Blue bean = applicationContext.getBean(Blue.class);
+        System.out.println(bean);
+
+        // 工厂Bean获取的是调用getObject创建的对象
+        Object bean1 = applicationContext.getBean("colorFactoryBean");
+        Object bean2 = applicationContext.getBean("colorFactoryBean");
+        System.out.println("bean的类型" +  bean1.getClass());
+        System.out.println(bean1 == bean2);
+
+        Object bean3 = applicationContext.getBean("&colorFactoryBean");
+        System.out.println("bean3的类型" +  bean3.getClass());
     }
 
     private void printBeans(AnnotationConfigApplicationContext applicationContext) {
